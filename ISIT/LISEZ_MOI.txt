@@ -1,0 +1,46 @@
+# ISIT — application et serveur (version de démarrage)
+
+## Contenu
+- `server.js` : serveur web et API ISIT.
+- `public/index.html` : interface mobile ISIT, avec sélection de texte désactivée (les champs restent sélectionnables).
+- `isit.sqlite` : créé automatiquement au premier lancement, pour les comptes, publications, réactions, commentaires et abonnements.
+- `uploads/` : fichiers photo/vidéo envoyés par les membres.
+
+## Lancer sur Windows 10/11
+1. Installe Node.js 20 ou une version plus récente depuis https://nodejs.org/
+2. Décompresse le dossier ISIT_Server.
+3. Ouvre le dossier, clique dans la barre d'adresse de l'Explorateur, écris `cmd`, puis Entrée.
+4. Exécute :
+   `npm install`
+5. Puis :
+   `npm start`
+6. Ouvre Chrome à l'adresse :
+   `http://localhost:3000`
+
+Pour arrêter le serveur : retourne dans la fenêtre noire et appuie sur `Ctrl + C`.
+
+## Fonctionnalités connectées au serveur
+- Création de compte avec téléphone et mot de passe.
+- Connexion et déconnexion avec session.
+- Profil et photo de profil.
+- Publication de photos et vidéos (100 Mo maximum).
+- Fil public et fil des abonnements.
+- J'aime / Je n'aime pas.
+- Commentaires.
+- Abonnements à des comptes.
+- Recherche de comptes et de publications.
+- Données conservées dans SQLite et médias conservés dans `uploads/`.
+
+## Important avant une vraie ouverture sur Internet
+Cette version est un serveur fonctionnel de départ, mais elle n'est pas encore prête pour un lancement public à grande échelle.
+- Le numéro de téléphone n'est pas encore vérifié par SMS. Un fournisseur SMS et un flux de code OTP doivent être configurés.
+- Pour Internet, configure HTTPS, une vraie valeur secrète `SESSION_SECRET`, sauvegardes, stockage vidéo adapté, modération et signalement opérationnels, règles de confidentialité et conditions légales.
+- Le serveur local `localhost` n'est accessible que depuis cet ordinateur. Pour que d'autres téléphones et ordinateurs se connectent, il faudra héberger le serveur sur Internet et configurer un nom de domaine.
+- Le serveur ne fournit pas encore de recommandations algorithmiques, notifications push, diffusion vidéo adaptative ni modération automatique.
+- Les contenus envoyés doivent respecter les droits d'auteur et les règles de la plateforme.
+
+## Langues
+L'interface propose Français et English. La traduction couvre les principaux boutons de navigation; certains textes descriptifs et formulaires restent en français dans cette version.
+
+## Sécurité
+Les mots de passe sont hachés avec bcrypt. Les cookies de session sont `httpOnly` et `sameSite=lax`. Ne publie jamais le serveur sur Internet avant d'avoir configuré HTTPS et `SESSION_SECRET`.
